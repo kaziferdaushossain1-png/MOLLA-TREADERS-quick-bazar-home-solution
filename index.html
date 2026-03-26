@@ -38,7 +38,6 @@
         .scrolling-notice span { display: inline-block; padding-left: 100%; animation: marquee 18s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-        /* হেডার সেকশন - নাম পরিবর্তনের জায়গা */
         header { 
             background: var(--header-gradient); 
             padding: 40px 15px; 
@@ -48,39 +47,55 @@
         }
         
         .logo-wrap { display: inline-flex; flex-direction: column; align-items: center; animation: heartBeat 2s infinite; text-decoration: none; }
-        
-        /* মোল্লা ট্রেডার্স - বড় অক্ষরে */
-        .logo-main { 
-            font-size: 45px; 
-            font-weight: 900; 
-            color: var(--brand-dark); 
-            line-height: 1; 
-            text-transform: uppercase; 
-            margin: 0; 
-            letter-spacing: 2px;
-        }
+        .logo-main { font-size: 45px; font-weight: 900; color: var(--brand-dark); line-height: 1; text-transform: uppercase; margin: 0; letter-spacing: 2px; }
         .logo-main span { color: var(--brand-red); }
-        
-        /* কুইক বাজার হোম সলিউশন - ছোট অক্ষরে নিচে */
-        .logo-sub { 
-            font-size: 16px; 
-            color: var(--brand-red); 
-            letter-spacing: 3px; 
-            font-weight: bold; 
-            margin-top: 10px; 
-            text-transform: uppercase;
-            border-top: 2px solid var(--brand-dark);
-            padding-top: 5px;
-        }
+        .logo-sub { font-size: 16px; color: var(--brand-red); letter-spacing: 3px; font-weight: bold; margin-top: 10px; text-transform: uppercase; border-top: 2px solid var(--brand-dark); padding-top: 5px; }
         
         @keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-        .video-container { max-width: 340px; margin: 25px auto; padding: 0 10px; }
-        .video-box { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); border: 3px solid white; }
-        .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        /* নতুন ৩ কলামের স্লাইডশো সেকশন */
+        .slideshow-container { 
+            max-width: 1200px; 
+            margin: 25px auto; 
+            padding: 0 20px; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 20px; 
+        }
+        
+        @media (min-width: 900px) {
+            .slideshow-container { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .slideshow-box { 
+            position: relative; 
+            width: 100%; 
+            padding-bottom: 75%; /* 4:3 Aspect Ratio */
+            height: 0; 
+            overflow: hidden; 
+            border-radius: 15px; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+            border: 3px solid white; 
+            background: #eee;
+        }
+        
+        .slideshow-box img { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: opacity 0.5s ease-in-out; 
+            opacity: 0; 
+        }
+        
+        .slideshow-box img.active { 
+            opacity: 1; 
+        }
 
         .search-area { max-width: 800px; margin: 20px auto; padding: 0 15px; }
-        #search { width: 100%; padding: 18px 25px; border-radius: 35px; border: 2px solid #ddd; outline: none; font-size: 16px; }
+        #search { width: 100%; padding: 18px 25px; border-radius: 35px; border: 2px solid #ddd; outline: none; font-size: 16px; background: var(--card-bg); color: var(--text-main); }
 
         .container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 20px; }
         .card { background: var(--card-bg); border-radius: 25px; padding: 20px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.03); transition: 0.3s; }
@@ -95,13 +110,18 @@
         .card img { width: 100%; height: 100%; object-fit: cover; }
         
         .counter { display: flex; align-items: center; justify-content: center; gap: 15px; background: #f8f9fa; border-radius: 35px; margin: 15px 0; padding: 10px; border: 1px solid #eee; }
+        @media (prefers-color-scheme: dark) { .counter { background: #2d3436; border-color: #444; } }
         .c-btn { background: var(--brand-red); color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 22px; }
         .q-val { font-size: 24px; font-weight: bold; min-width: 35px; text-align: center; }
 
         .price { font-size: 28px; font-weight: bold; color: var(--brand-red); text-align: center; margin: 10px 0; }
         .old { font-size: 16px; text-decoration: line-through; color: #999; margin-left: 8px; }
 
-        .btn-wa { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; margin-top: 10px; border-radius: 15px; text-decoration: none; font-weight: bold; color: white; background: #25D366; font-size: 17px; }
+        .btn-action { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; margin-top: 10px; border-radius: 15px; text-decoration: none; font-weight: bold; color: white; font-size: 17px; cursor: pointer; border: none; width: 100%; }
+        .btn-wa { background: #25D366; }
+        
+        /* বিকাশ পেমেন্ট বাটন ডিজাইন */
+        .btn-bkash { background: #e2136e; }
 
         .float-call { position: fixed; bottom: 30px; right: 25px; background: #0984e3; color: white; width: 68px; height: 68px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 2000; animation: callPulse 2s infinite; text-decoration: none; }
         @keyframes callPulse { 0% { box-shadow: 0 0 0 0 rgba(9,132,227,0.7); } 70% { box-shadow: 0 0 0 20px rgba(9,132,227,0); } 100% { box-shadow: 0 0 0 0 rgba(9,132,227,0); } }
@@ -110,7 +130,7 @@
 <body>
 
 <div class="scrolling-notice">
-    <span>স্বাগতম মোল্লা ট্রেডার্সে! কুইক বাজার হোম সলিউশনে প্রতিটি পণ্যে ২০% ধামাকা ছাড়! যোগাযোগ: ০১৭০০-০০০০০০</span>
+    <span>স্বাগতম মোল্লা ট্রেডার্সে! কুইক বাজার হোম সলুশনে প্রতিটি পণ্যে ২০% ধামাকা ছাড় চলছে! যোগাযোগ: ০১৭০০-০০০০০০</span>
 </div>
 
 <header>
@@ -120,9 +140,21 @@
     </div>
 </header>
 
-<div class="video-container">
-    <div class="video-box">
-        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" allowfullscreen loading="lazy"></iframe>
+<div class="slideshow-container">
+    <div class="slideshow-box" id="slide-1">
+        <img src="https://picsum.photos/400/300?random=1" class="active">
+        <img src="https://picsum.photos/400/300?random=2">
+        <img src="https://picsum.photos/400/300?random=3">
+    </div>
+    <div class="slideshow-box" id="slide-2">
+        <img src="https://picsum.photos/400/300?random=4" class="active">
+        <img src="https://picsum.photos/400/300?random=5">
+        <img src="https://picsum.photos/400/300?random=6">
+    </div>
+    <div class="slideshow-box" id="slide-3">
+        <img src="https://picsum.photos/400/300?random=7" class="active">
+        <img src="https://picsum.photos/400/300?random=8">
+        <img src="https://picsum.photos/400/300?random=9">
     </div>
 </div>
 
@@ -138,6 +170,51 @@
     const sheetId = '1cH7KsBpVu5NSaFrff2_Ac0cqoa3jXmQT2pT7fDk5DT8';
     const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
 
+    let productImages = []; // সব ছবির লিঙ্ক এখানে জমা হবে
+
+    // স্লাইডশো চালানোর ফাংশন
+    function startSlideshow(boxId) {
+        let box = document.getElementById(boxId);
+        let images = box.getElementsByTagName('img');
+        let currentIndex = 0;
+
+        setInterval(() => {
+            // বর্তমান ছবি লুকাতে হবে
+            images[currentIndex].classList.remove('active');
+            
+            // নতুন ছবির ইনডেক্স ঠিক করতে হবে
+            currentIndex = (currentIndex + 1) % images.length;
+            
+            // নতুন ছবি দেখাতে হবে
+            images[currentIndex].classList.add('active');
+        }, 2000); // ২ সেকেন্ড পর পর বদলাবে
+    }
+
+    // গুগল শিট থেকে সব ছবি লোড করে স্লাইডশোতে বসানোর ফাংশন
+    function populateSlideshows() {
+        if (productImages.length < 9) return; // অন্তত ৯টা ছবি লাগবে
+
+        let slideContainers = ['slide-1', 'slide-2', 'slide-3'];
+        
+        slideContainers.forEach(containerId => {
+            let container = document.getElementById(containerId);
+            container.innerHTML = ''; // আগের ডামি ছবি মুছে ফেলবে
+
+            // প্রতি কলামের জন্য ৩টা র‍্যান্ডম ছবি বেছে নেবে
+            for (let i = 0; i < 3; i++) {
+                let randomIndex = Math.floor(Math.random() * productImages.length);
+                let imgUrl = productImages[randomIndex];
+                
+                let img = document.createElement('img');
+                img.src = imgUrl;
+                if (i === 0) img.classList.add('active'); // প্রথম ছবিটা দেখাবে
+                container.appendChild(img);
+            }
+            // স্লাইডশো শুরু করবে
+            startSlideshow(containerId);
+        });
+    }
+
     async function loadData() {
         try {
             const res = await fetch(csvUrl);
@@ -152,6 +229,9 @@
                     const name = col[0].replace(/"/g, '');
                     const price = parseInt(col[1].replace(/"/g, ''));
                     const img = col[3] ? col[3].replace(/"/g, '') : 'https://picsum.photos/400/300?random='+i;
+
+                    // সব ছবির লিঙ্ক স্লাইডশোর জন্য জমা করছে
+                    productImages.push(img);
 
                     area.innerHTML += `
                     <div class="card" data-name="${name.toLowerCase()}">
@@ -170,10 +250,17 @@
                             <span class="q-val" id="q-${i}">0</span>
                             <button class="c-btn" onclick="upd(${i},1)">+</button>
                         </div>
-                        <a href="https://wa.me/8801700000000?text=অর্ডার: ${name}" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp অর্ডার</a>
+                        
+                        <button class="btn-action btn-bkash" onclick="orderBkash('${name}', ${i})"><i class="fas fa-credit-card"></i> বিকাশ পেমেন্ট</button>
+                        
+                        <a href="https://wa.me/8801700000000?text=অর্ডার: ${name}" target="_blank" class="btn-action btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp অর্ডার</a>
                     </div>`;
                 }
             });
+
+            // ডেটা লোড হওয়ার পর স্লাইডশো চালু করবে
+            populateSlideshows();
+
         } catch(e) { console.error("Data load failed"); }
     }
 
@@ -188,6 +275,14 @@
             navigator.share({ title: 'Molla Traders', text: name + ' কিনুন ২০% ছাড়ে!', url: window.location.href });
         } else { alert("লিঙ্ক কপি করুন: " + window.location.href); }
     }
+
+    // বিকাশ পেমেন্টের ফাংশন
+    function orderBkash(name, i) {
+        let q = document.getElementById('q-'+i).innerText;
+        if(q == 0) { alert("অনুগ্রহ করে অন্তত ১টি পরিমাণ সিলেক্ট করুন!"); return; }
+        alert(`বিকাশ পেমেন্ট গেটওয়ে এখনো সেট করা হয়নি। আপনি ${q} টি ${name} এর জন্য WhatsApp এ অর্ডার দিন, আমরা বিকাশে পেমেন্ট নিয়ে নেব।`);
+    }
+
     loadData();
 </script>
 
